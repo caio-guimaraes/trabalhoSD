@@ -1,3 +1,5 @@
+import time
+
 import rpyc
 import random
 
@@ -10,24 +12,26 @@ class MyService(rpyc.Service):
         #  código que é executado quando uma conexão é finalizada, caso seja necessário
         pass
 
-
     def get_list(self, tam):
-        list = tam * [0]
+        list = tam*[0]
         for i in range(0, tam):
             list[i] = random.randint(0, tam-1)
         return list
 
     def exposed_sum_list(self, tam):
+        start = time.time()
         list = self.get_list(tam)
         sum = 0
         for i in range(0, tam):
             sum += list[i]
+        end = time.time()
+        print(end - start)
         return sum
 
 
 # Para iniciar o servidor
 if __name__ == "__main__":
     from rpyc.utils.server import ThreadedServer
-
     t = ThreadedServer(MyService, port=18861)
     t.start()
+

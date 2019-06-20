@@ -1,3 +1,4 @@
+import time
 import rpyc
 import sys
 
@@ -8,17 +9,16 @@ def ler_tamanho_vetor():
     return int(tamanho)
 
 
-def f(x):
-    return x**2
 
-# if len(sys.argv) < 2:
-#     exit("Usage {} SERVER".format(sys.argv[0]))
+if len(sys.argv) < 2:
+    exit("Usage {} SERVER".format(sys.argv[0]))
 
-# server = sys.argv[1]
-server = "localhost"
+server = sys.argv[1]
 
 conn = rpyc.connect(server, 18861)
 
 n = ler_tamanho_vetor()
-
+start = time.time()
 print(conn.root.sum_list(n))
+end = time.time()
+print(end-start)
