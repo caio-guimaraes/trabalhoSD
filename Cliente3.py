@@ -21,4 +21,4 @@ conn = rpyc.connect(server, 18861)
 
 n = ler_tamanho_vetor()
 
-print(conn.root.sum(n))
+print(conn.root.sum_list(n))

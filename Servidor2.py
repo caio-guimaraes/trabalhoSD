@@ -10,20 +10,19 @@ class MyService(rpyc.Service):
         #  código que é executado quando uma conexão é finalizada, caso seja necessário
         pass
 
-    def exposed_sum_list(self, tam):
-        list = self.get_list(tam)
-        print(list)
-        sum = 0
-        for i in range(0, tam):
-            sum += list[i]
-        return sum
 
     def get_list(self, tam):
-        print(tam)
         list = tam * [0]
         for i in range(0, tam):
             list[i] = random.randint(0, tam-1)
         return list
+
+    def exposed_sum_list(self, tam):
+        list = self.get_list(tam)
+        sum = 0
+        for i in range(0, tam):
+            sum += list[i]
+        return sum
 
 
 # Para iniciar o servidor
